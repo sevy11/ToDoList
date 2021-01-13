@@ -38,6 +38,7 @@ struct TodoListView: View {
         .onAppear(perform: fetchLists)
         .navigationViewStyle(DoubleColumnNavigationViewStyle())
         .padding()
+        .onDisappear(perform: clearLists)
     }
     
     func fetchLists() {
@@ -54,6 +55,10 @@ struct TodoListView: View {
     
     func removeItem(at offset: IndexSet) {
         viewModel.removeList(indexSet: offset)
+    }
+    
+    func clearLists() {
+        viewModel.lists.removeAll()
     }
 }
 

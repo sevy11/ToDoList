@@ -28,6 +28,26 @@ struct TodoListDetailView: View {
             ForEach(viewModel.detailedItems) { todo in
                 HStack {
                     // List with all the todo details
+                    Button(action: {
+                        checkUnCheck(item: todo)
+                    }) {
+                        if todo.done {
+                            ZStack {
+                                Rectangle()
+                                    .stroke(Color.red, lineWidth: 5)
+                                    .frame(width: 25, height: 25)
+                                    .cornerRadius(2)
+                                Image(systemName: "checkmark")
+                                    .foregroundColor(.red)
+                                    .frame(width: 25, height: 25)
+                            }
+                        } else {
+                            Rectangle()
+                                .stroke(Color.gray, lineWidth: 5)
+                                .frame(width: 25, height: 25)
+                                .cornerRadius(2)
+                        }
+                    }
                     Text(todo.detail)
                 }
             }.onDelete(perform: removeItem)
@@ -49,7 +69,11 @@ struct TodoListDetailView: View {
     }
     
     func removeItem(at offset: IndexSet) {
-        viewModel.removeToDoItem(indexSet: offset, listName: toDoListTitle)
+        viewModel.removeToDoItem(offset: offset, listName: toDoListTitle)
+    }
+    
+    func checkUnCheck(item: ToDo) {
+        viewModel.checkUnCheck(item: item, listName: toDoListTitle)
     }
     
     func clearToDos() {

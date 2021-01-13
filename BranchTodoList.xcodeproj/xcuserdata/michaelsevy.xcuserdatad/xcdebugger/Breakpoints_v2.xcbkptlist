@@ -7,16 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5F6C4929-032B-4CAB-B964-9ABD1DD3466E"
-            shouldBeEnabled = "No"
+            uuid = "E95055FB-5130-4993-A368-41C5D5CF8BC3"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BranchTodoList/Todo List Detail/ToodListDetailViewModel.swift"
+            filePath = "BranchTodoList/Todo List/TodoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "fetchToDosForList(named:)"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "fetchLists()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "653ECB9F-938C-4A90-A711-F2F9C04BD75B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BranchTodoList/Todo List/TodoListViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "addList(name:toDos:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

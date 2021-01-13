@@ -12,7 +12,8 @@ import SwiftUI
 protocol ToDoListDetailProtocol: class {
     func fetchToDosForList(named: String)
     func addToDo(detail: String, listName: String)
-    func removeToDoItem(indexSet: IndexSet, listName: String)
+    func removeToDoItem(offset: IndexSet, listName: String)
+    func checkUnCheck(item: ToDo, listName: String)
 }
 
 final class TodoListDetailViewModel: ObservableObject, Identifiable, ToDoListDetailProtocol {
@@ -55,8 +56,29 @@ final class TodoListDetailViewModel: ObservableObject, Identifiable, ToDoListDet
         UserDefaults.standard.set(detailDones, forKey: "\(listName)_dones")
     }
 
-    func removeToDoItem(indexSet: IndexSet, listName: String) {
-        detailedItems.remove(atOffsets: indexSet)
+    func removeToDoItem(offset: IndexSet, listName: String) {
+        detailedItems.remove(atOffsets: offset)
+        saveData(listName: listName)
+    }
+    
+    func checkUnCheck(item: ToDo, listName: String) {
+        let newItem = ToDo(done: !item.done, detail: item.detail)
+        // Update the data source with new item, ugly way
+        var updatedDetailedItems = [ToDo]()
+        for todo in detailedItems {
+            if todo.detail == item.detail {
+                updatedDetailedItems.append(newItem)
+            } else {
+                updatedDetailedItems.append(todo)
+            }
+        }
+        detailedItems = updatedDetailedItems
+        
+        // Persist it
+        saveData(listName: listName)
+    }
+    
+    private func saveData(listName: String) {
         details.removeAllObjects()
         detailDones.removeAllObjects()
         // Update Defaults

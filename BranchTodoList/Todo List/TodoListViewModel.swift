@@ -29,10 +29,6 @@ final class TodoListViewModel: ObservableObject, Identifiable, ToDoListProtocol 
     private var listTitles = NSMutableArray()
     
     func addList(name: String, toDos: [ToDo]) {
-        // Copy the [List] to the titles NSString list from UserDefaults
-        for list in lists {
-            listTitles.add(list.title as NSString)
-        }
         listTitles.add(name as NSString)
         
         // Now add the lsit name to the self.lists
@@ -52,11 +48,14 @@ final class TodoListViewModel: ObservableObject, Identifiable, ToDoListProtocol 
     }
     
     func fetchLists() {
-        guard let listArray = UserDefaults.standard.array(forKey: "lists") else { return }
-        for name in listArray {
+        guard let listNames = UserDefaults.standard.array(forKey: "lists") else { return }
+        listTitles.removeAllObjects()
+        
+        for name in listNames {
             guard let listName = name as? String else { return }
             let toDoList = ToDoList(title: listName)
-            self.lists.append(toDoList)
+            lists.append(toDoList)
+            listTitles.add(listName)
         }
     }
 }
